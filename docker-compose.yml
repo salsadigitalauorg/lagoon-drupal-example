@@ -15,8 +15,7 @@ x-volumes:
   &default-volumes
     # Define all volumes you would like to have real-time mounted into the docker containers
     volumes:
-      - .:/app:delegated ### Local overrides to mount host filesystem. Automatically removed in CI and PROD.
-      - files:/app/web/sites/default/files
+      - .:/app:delegated
 
 x-environment: &default-environment
   LAGOON_ENVIRONMENT_TYPE: ${LAGOON_ENVIRONMENT_TYPE:-}
@@ -54,7 +53,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: .docker/Dockerfile.nginx-drupal
+      dockerfile: .docker/Dockerfile.nginx
       args:
         CLI_IMAGE: *lagoon-project
         IMAGE_VERSION: *govcms-image-version
@@ -89,7 +88,7 @@ services:
       << : *default-environment
 
   mariadb:
-    image: uselagoon/mariadb-10.5-drupal:latest
+    image: uselagoon/mariadb-10.5:latest
     labels:
       lagoon.type: mariadb
     ports:
