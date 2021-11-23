@@ -12,7 +12,7 @@ tasks:
   post-rollout:
     - run:
         name: run custom post-rollout tasks
-        command: ahoy post-rollout
+        command: ahoy my post-rollout
         service: cli
 
 environments:
