@@ -37,14 +37,6 @@ commands:
     usage: Run command inside cli container.
     cmd: docker-compose exec -T cli bash -c "$*"
 
-  pre-rollout:
-    usage: Run commands for pre-rollout tasks.
-    cmd: scripts/pre-rollout.sh
-
-  post-rollout:
-    usage: Run commands for post-rollout tasks.
-    cmd: scripts/post-rollout.sh
-
   drush:
     usage: Run drush commands in cli container.
     cmd: docker-compose exec -T cli drush "$@"
@@ -135,3 +127,4 @@ commands:
       cp .env.default .env
       sed -i.bak "s/{{ PROJECT_NAME }}/$1/" .env && rm .env.bak
       sed -i.bak "s/{{ PROJECT_NAME }}/$1/" docker-compose.yml && rm docker-compose.yml.bak
+      sed -i.bak "s/{{ PROJECT_NAME }}/$1/" .lagoon.yml && rm .lagoon.yml.bak

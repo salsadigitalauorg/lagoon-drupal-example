@@ -1,0 +1,25 @@
+docker-compose-yaml: docker-compose.yml
+
+project: {{ PROJECT_NAME }}
+
+tasks:
+  pre-rollout:
+    - run:
+        name: run custom pre-rollout tasks
+        command: ahoy my pre-rollout
+        service: cli
+
+  post-rollout:
+    - run:
+        name: run custom post-rollout tasks
+        command: ahoy post-rollout
+        service: cli
+
+environments:
+  main:
+    # routes:
+    cronjobs:
+      - name: drush cron
+        schedule: "*/15 * * * *"
+        command: drush cron
+        service: cli

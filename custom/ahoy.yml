@@ -11,7 +11,10 @@ commands:
       echo -e "Type \`\033[0;32mahoy my\033[0m\` for a list of custom commmands."
       echo
 
-#  mycustomcommand:
-#    cmd: |
-#      echo "Anything complex you can do on the command line, you can make available for all developers in your project."
-#      git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -15
+  pre-rollout:
+    usage: Run commands for pre-rollout tasks.
+    cmd: echo "** PREROLL"
+
+  post-rollout:
+    usage: Run commands for post-rollout tasks.
+    cmd: echo "** POSTROLL"

@@ -11,3 +11,8 @@ FROM uselagoon/php-7.4-cli-drupal:latest
 
 # Define where the application root is located
 ENV WEBROOT=web
+
+# Install ahoy for wrapped commands
+RUN curl -L "https://github.com/ahoy-cli/ahoy/releases/download/2.0.0/ahoy-bin-linux-amd64" -o /usr/local/bin/ahoy &&\
+    chmod +x /usr/local/bin/ahoy
+
