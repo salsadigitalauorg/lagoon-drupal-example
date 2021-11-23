@@ -126,10 +126,10 @@ commands:
       - 'custom/ahoy.yml'
 
   init:
-    usage: Initialise the codebase on first-time setup: ahoy init project-name
+    usage: Initialise the codebase on first-time setup (ahoy init project-name)
     cmd: |
-      if [[ -z "$1" ]] then
-        echo "ERR - Need a project name."
+      if [[ -z "$1" ]]; then
+        echo "ERR: Need a project name."
         exit 1
       fi;
       sed -i.bak "s/{{ PROJECT_NAME }}/$1/" .env && rm .env.bak
