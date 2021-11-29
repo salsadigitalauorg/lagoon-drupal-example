@@ -129,7 +129,7 @@ commands:
         exit 1
       fi;
 
-      mv ".docker-compose-$project_type.yml" .docker-compose.yml && rm -rf .docker-compose-*.yml
+      mv "docker-compose-$project_type.yml" docker-compose.yml && rm -rf docker-compose-*.yml
       mv "composer-$project_type.json" composer.json && rm -rf composer-*.json
       mv ".docker-$project_type" .docker && rm -rf .docker-*
       cp .env.default .env
