@@ -8,14 +8,15 @@ x-lagoon-project: &lagoon-project
 x-lagoon-local-dev-url: &lagoon-local-dev-url
   http://{{ PROJECT_NAME }}.docker.amazee.io
 
-x-govcms-image-version: &govcms-image-version
+x-image-version: &image-version
   ${IMAGE_VERSION:-latest}
 
 x-volumes:
   &default-volumes
     # Define all volumes you would like to have real-time mounted into the docker containers
     volumes:
-      - .:/app:delegated
+      - .:/app:delegated ### Local overrides to mount host filesystem. Automatically removed in CI and PROD.
+      - uploads:/app/web/content/uploads
 
 x-environment: &default-environment
   LAGOON_ENVIRONMENT_TYPE: ${LAGOON_ENVIRONMENT_TYPE:-}
@@ -25,7 +26,7 @@ x-environment: &default-environment
   XDEBUG_ENABLE: ${XDEBUG_ENABLE:-}
 
 volumes:
-  files:
+  uploads:
     {}
 
 services:
@@ -36,12 +37,13 @@ services:
       dockerfile: .docker/Dockerfile.cli
       args:
         LAGOON_SAFE_PROJECT: *lagoon-project
-        IMAGE_VERSION: *govcms-image-version
+        IMAGE_VERSION: *image-version
     image: *lagoon-project
     labels:
       lagoon.type: cli-persistent
       lagoon.persistent.name: nginx
-      lagoon.persistent: /app/web/sites/default/files/
+      lagoon.persistent: /app/web/content/uploads/
+      lando.type: php-cli
     << : *default-volumes
     environment:
       << : *default-environment
@@ -56,16 +58,18 @@ services:
       dockerfile: .docker/Dockerfile.nginx
       args:
         CLI_IMAGE: *lagoon-project
-        IMAGE_VERSION: *govcms-image-version
+        IMAGE_VERSION: *image-version
     labels:
       lagoon.type: nginx-php-persistent
-      lagoon.persistent: /app/web/sites/default/files/
-    << : *default-volumes
+      lagoon.persistent: /app/web/content/uploads/
+      lando.type: nginx
+    ports:
+      - "8080"
+    << : *default-volumes # loads the defined volumes from the top
     depends_on:
-      - cli
+      - cli # basically just tells docker-compose to build the cli first
     environment:
-      << : *default-environment
-      LAGOON_LOCALDEV_URL: *default-url
+      << : *default-environment # loads the defined environment variables from the top
     networks:
       - amazeeio-network
       - default
@@ -76,11 +80,12 @@ services:
       dockerfile: .docker/Dockerfile.php
       args:
         CLI_IMAGE: *lagoon-project
-        IMAGE_VERSION: *govcms-image-version
+        IMAGE_VERSION: *image-version
     labels:
       lagoon.type: nginx-php-persistent
       lagoon.name: nginx
-      lagoon.persistent: /app/web/sites/default/files/
+      lagoon.persistent: /app/web/content/uploads/
+      lando.type: php-fpm
     << : *default-volumes
     depends_on:
       - cli
@@ -91,8 +96,9 @@ services:
     image: uselagoon/mariadb-10.5:latest
     labels:
       lagoon.type: mariadb
+      lando.type: mariadb
     ports:
-      - "3306" # Find port on host with `docker-compose port mariadb 3306`
+      - "3306" # exposes the port 3306 with a random local port, find it with `docker-compose port mariadb 3306`
     environment:
       << : *default-environment
 

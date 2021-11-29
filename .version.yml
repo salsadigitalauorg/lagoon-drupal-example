@@ -1,0 +1,2 @@
+type: {{ PROJECT_TYPE }}
+scaffold_version: 1.0

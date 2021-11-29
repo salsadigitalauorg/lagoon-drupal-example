@@ -1,16 +1,20 @@
-FROM uselagoon/php-7.4-cli-drupal:latest
+FROM uselagoon/php-7.4-cli:${IMAGE_VERSION}
 
+# Install wp-cli
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp && chmod +x /usr/local/bin/wp
 
-###
-## Example for composer based app / Drupal
-###
+# Add function to .bashrc to run wp-cli with --allow-root
+RUN echo 'wp() { /usr/local/bin/wp "$@" --allow-root; }' >>  ~/.bashrc \
+    && mkdir -p ~/.wp-cli \
+    && echo "path: '/app/web/wp'" > ~/.wp-cli/config.yml
 
-# RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev
-# COPY . /app
-# RUN mkdir -p -v -m775 /app/web/sites/default/files
+COPY . /app
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev
+RUN mkdir -p -v -m775 /app/web/content/uploads/
 
 # Define where the application root is located
 ENV WEBROOT=web
+ENV PAGER=less
 
 # Install ahoy for wrapped commands
 RUN curl -L "https://github.com/ahoy-cli/ahoy/releases/download/2.0.0/ahoy-bin-linux-amd64" -o /usr/local/bin/ahoy &&\

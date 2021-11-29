@@ -120,11 +120,28 @@ commands:
   init:
     usage: Initialise the codebase on first-time setup (ahoy init project-name)
     cmd: |
-      if [[ -z "$1" ]]; then
-        echo "ERR: Need a project name."
+      read -p 'Project name: ' project_name
+      read -p 'Type [drupal|wordpress]: ' project_type
+
+      if [[ -z "$project_name" ]] || [[ -z "$project_type" ]] || [[ -z "$composer_codebase" ]]; then
+        echo "ERR: Missing values."
         exit 1
       fi;
-      cp .env.default .env
-      sed -i.bak "s/{{ PROJECT_NAME }}/$1/" .env && rm .env.bak
-      sed -i.bak "s/{{ PROJECT_NAME }}/$1/" docker-compose.yml && rm docker-compose.yml.bak
-      sed -i.bak "s/{{ PROJECT_NAME }}/$1/" .lagoon.yml && rm .lagoon.yml.bak
+
+      echo mv ".docker-compose-$project_type.yml" .docker-compose.yml && rm -rf .docker-compose-*.yml
+      echo mv "composer-$project_type.json" composer.json && rm -rf composer-*.json
+      echo mv ".docker-$project_type" .docker && rm -rf .docker-*
+      echo cp .env.default .env
+      echo sed -i.bak "s/{{ PROJECT_NAME }}/$project_name/" .env && rm .env.bak
+      echo sed -i.bak "s/{{ PROJECT_NAME }}/$project_name/" docker-compose.yml && rm docker-compose.yml.bak
+      echo sed -i.bak "s/{{ PROJECT_NAME }}/$project_name/" .lagoon.yml && rm .lagoon.yml.bak
+      echo sed -i.bak "s/{{ PROJECT_TYPE }}/$project_type/" .version.yml && rm .version.yml.bak
+
+      #if [[ -z "$1" ]]; then
+      #  echo "ERR: Need a project name."
+      #  exit 1
+      #fi;
+      #cp .env.default .env
+      #sed -i.bak "s/{{ PROJECT_NAME }}/$1/" .env && rm .env.bak
+      #sed -i.bak "s/{{ PROJECT_NAME }}/$1/" docker-compose.yml && rm docker-compose.yml.bak
+      #sed -i.bak "s/{{ PROJECT_NAME }}/$1/" .lagoon.yml && rm .lagoon.yml.bak
