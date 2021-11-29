@@ -1,3 +1,5 @@
+ARG IMAGE_VERSION=latest
+
 FROM uselagoon/php-7.4-cli:${IMAGE_VERSION}
 
 # Install wp-cli

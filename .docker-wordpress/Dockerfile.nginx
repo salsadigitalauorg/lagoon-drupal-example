@@ -1,4 +1,6 @@
 ARG CLI_IMAGE
+ARG IMAGE_VERSION=latest
+
 FROM ${CLI_IMAGE} as cli
 
 FROM uselagoon/nginx:${IMAGE_VERSION}
