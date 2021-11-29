@@ -10,9 +10,11 @@ RUN echo 'wp() { /usr/local/bin/wp "$@" --allow-root; }' >>  ~/.bashrc \
     && mkdir -p ~/.wp-cli \
     && echo "path: '/app/web/wp'" > ~/.wp-cli/config.yml
 
-COPY . /app
 RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev
 RUN mkdir -p -v -m775 /app/web/content/uploads/
+
+COPY .docker/wordpress/wp-config.php /app/web/wp-config.php
+COPY . /app
 
 # Define where the application root is located
 ENV WEBROOT=web
