@@ -49,7 +49,7 @@
         "web/content/plugins/{$name}/": ["type:wordpress-plugin"],
         "web/content/themes/{$name}/": ["type:wordpress-theme"]
       },
-      "wordpress-install-dir": "web/wp"
+      "wordpress-install-dir": "web"
     },
     "scripts": {
       "post-root-package-install": [
