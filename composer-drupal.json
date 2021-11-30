@@ -46,7 +46,8 @@
                 "amazeeio/drupal_integrations"
             ],
             "file-mapping": {
-                "[web-root]/sites/default/all.settings.php": ".docker/assets/all.settings.php"
+                "[web-root]/sites/default/all.settings.php": ".docker/assets/all.settings.php",
+                "[web-root]/sites/default/settings.lagoon.php": ".docker/assets/settings.lagoon.php"
             },
             "locations": {
                 "web-root": "web/"
