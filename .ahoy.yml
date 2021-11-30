@@ -143,7 +143,7 @@ commands:
         echo "    - Remove composer.* files\n"
         echo "    - Update .docker/Dockerfile.cli to remove composer install\n\n"
       else
-        composer install
+        COMPOSER_MEMORY_LIMIT=-1 composer install
       fi
 
       echo "✅ Done deal. Ready for ahoy build."
