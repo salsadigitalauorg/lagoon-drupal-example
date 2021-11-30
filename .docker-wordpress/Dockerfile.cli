@@ -10,6 +10,7 @@ RUN echo 'wp() { /usr/local/bin/wp "$@" --allow-root; }' >>  ~/.bashrc \
     && mkdir -p ~/.wp-cli \
     && echo "path: '/app/web/wp'" > ~/.wp-cli/config.yml
 
+COPY composer.* /app/
 RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev
 RUN mkdir -p -v -m775 /app/web/content/uploads/
 
