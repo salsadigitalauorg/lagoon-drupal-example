@@ -139,11 +139,12 @@ commands:
       sed -i.bak "s/{{ PROJECT_TYPE }}/$project_type/" .version.yml && rm .version.yml.bak
 
       if [ "$composer_codebase" == "n" ]; then
-        echo "⚠️  Non-composer codebase. You should:\n"
-        echo "    - Remove composer.* files\n"
-        echo "    - Update .docker/Dockerfile.cli to remove composer install\n\n"
+        printf "⚠️  Non-composer codebase. You should:\n"
+        printf "    - Remove composer.* files\n"
+        printf "    - Update .docker/Dockerfile.cli to remove composer install\n"
+        printf "    - Manually configure database connectivity. See .docker/assets\n\n"
       else
         COMPOSER_MEMORY_LIMIT=-1 composer install
       fi
 
-      echo "✅ Done deal. Ready for ahoy build."
+      printf "✅ Done deal. Ready for ahoy build.\n"
