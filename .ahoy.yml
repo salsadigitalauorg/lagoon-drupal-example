@@ -144,11 +144,11 @@ commands:
         rm composer.*
         sed -i.bak "/composer install/d" .docker/Dockerfile.cli && rm .docker/Dockerfile.cli.bak
 
-        printf "⚠️  Non-composer codebase. You should:\n"
+        printf "\n⚠️  Non-composer codebase. You should:\n"
         printf "    - Consider using composer maybe?\n"
-        printf "    - Manually configure database connectivity. See .docker/assets\n\n"
+        printf "    - Manually configure database connectivity. See .docker/assets\n"
       else
         COMPOSER_MEMORY_LIMIT=-1 composer install
       fi
 
-      printf "✅ Done deal. Ready for ahoy build.\n"
+      printf "\n✅ Done deal. Ready for ahoy build.\n"
