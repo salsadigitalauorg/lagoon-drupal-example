@@ -138,3 +138,12 @@ commands:
       sed -i.bak "s/{{ PROJECT_NAME }}/$project_name/" .lagoon.yml && rm .lagoon.yml.bak
       sed -i.bak "s/{{ PROJECT_TYPE }}/$project_type/" .version.yml && rm .version.yml.bak
 
+      if [ "$composer_codebase" == "n" ]; then
+        echo "⚠️  Non-composer codebase. You should:\n"
+        echo "    - Remove composer.* files\n"
+        echo "    - Update .docker/Dockerfile.cli to remove composer install\n\n"
+      else
+        composer install
+      fi
+
+      echo "✅ Done deal. Ready for ahoy build."
