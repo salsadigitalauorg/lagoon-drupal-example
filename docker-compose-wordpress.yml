@@ -16,7 +16,7 @@ x-volumes:
     # Define all volumes you would like to have real-time mounted into the docker containers
     volumes:
       - .:/app:delegated ### Local overrides to mount host filesystem. Automatically removed in CI and PROD.
-      - uploads:/app/web/content/uploads
+      - .docker/wordpress/wp-config.php:/app/web/wp-config.php
 
 x-environment: &default-environment
   LAGOON_ENVIRONMENT_TYPE: ${LAGOON_ENVIRONMENT_TYPE:-}
