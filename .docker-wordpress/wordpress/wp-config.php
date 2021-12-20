@@ -37,6 +37,15 @@ define('DB_CHARSET', 'utf8mb4');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
+/** Settings that make Quant work properly. */
+$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+
+if (!empty($_SERVER['HTTP_HOST'])) {
+  define('WP_SITEURL', $protocol . $_SERVER['HTTP_HOST']);
+  define('WP_HOME', $protocol . $_SERVER['HTTP_HOST']);
+}
+define ('WPCF7_LOAD_JS', false);
+
 /**#@+
  * Authentication Unique Keys and Salts.
  *
@@ -85,8 +94,7 @@ define( 'WP_DEBUG', false );
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
 }
-define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/content' );
-define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/content' );
+
 
 /** Sets up WordPress vars and included files. */
 require_once( ABSPATH . 'wp-settings.php' );
