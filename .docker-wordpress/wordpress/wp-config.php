@@ -43,19 +43,19 @@ $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'h
 if (!empty($_SERVER['HTTP_HOST'])) {
   define('WP_SITEURL', $protocol . $_SERVER['HTTP_HOST']);
   define('WP_HOME', $protocol . $_SERVER['HTTP_HOST']);
-  define( 'WP_PLUGIN_URL',   $protocol . $_SERVER['HTTP_HOST'] . '/content/plugins' );
+  define('WP_PLUGIN_URL', $protocol . $_SERVER['HTTP_HOST'] . '/content/plugins' );
   define('WP_CONTENT_URL', $protocol . $_SERVER['HTTP_HOST'] . '/content');
 }
 elseif (!empty(getenv('LAGOON_ROUTE'))) {
   define('WP_SITEURL', $protocol . getenv('LAGOON_ROUTE'));
   define('WP_HOME', $protocol . getenv('LAGOON_ROUTE'));
-  define( 'WP_PLUGIN_URL',   $protocol . getenv('LAGOON_ROUTE') . '/content/plugins' );
+  define('WP_PLUGIN_URL', $protocol . getenv('LAGOON_ROUTE') . '/content/plugins' );
   define('WP_CONTENT_URL', $protocol . getenv('LAGOON_ROUTE') . '/content');
 }
 define ('WPCF7_LOAD_JS', false);
 
 define('WP_CONTENT_DIR', dirname(__FILE__) . '/content');
-define( 'WP_PLUGIN_DIR',   dirname( __FILE__ ) . '/content/plugins' );
+define('WP_PLUGIN_DIR', dirname( __FILE__ ) . '/content/plugins' );
 
 /**#@+
  * Authentication Unique Keys and Salts.
