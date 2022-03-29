@@ -60,7 +60,7 @@ commands:
   login:
     usage: Login to a website.
     cmd: docker-compose exec -T cli drush uli "$@"
-    
+
   unloop:
     usage: Fix local redirect loop
     cmd: |
@@ -132,6 +132,7 @@ commands:
       mv "docker-compose-$project_type.yml" docker-compose.yml && rm -rf docker-compose-*.yml
       mv "composer-$project_type.json" composer.json && rm -rf composer-*.json
       mv ".docker-$project_type" .docker && rm -rf .docker-*
+      mv ".lagoon-$project_type.yml" .lagoon.yml && rm -rf .lagoon-*
       cp .env.default .env
       sed -i.bak "s/{{ PROJECT_NAME }}/$project_name/" .env && rm .env.bak
       sed -i.bak "s/{{ PROJECT_NAME }}/$project_name/" docker-compose.yml && rm docker-compose.yml.bak

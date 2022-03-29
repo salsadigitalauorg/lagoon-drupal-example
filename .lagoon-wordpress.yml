@@ -1,0 +1,47 @@
+docker-compose-yaml: docker-compose.yml
+
+project: ausroc
+
+tasks:
+  pre-rollout:
+    - run:
+        name: Backup database before making any changes.
+        command: |
+          mkdir -p /app/web/content/uploads/backups
+          if $(/usr/local/bin/wp core is-installed --path=/app/web --allow-root) && [ -d /app/web/content/uploads/backups ] ; then
+            # Remove old backups.
+            echo "===> Removing files older than 2 weeks."
+            find /app/web/content/uploads/backups/ -type f -name 'pre-deploy-backup*' -mtime +14 -delete
+            # Create database backup.
+            echo "===> Creating database backup."
+            wp db export --add-drop-table --path=/app/web --allow-root - | gzip > /app/web/content/uploads/backups/pre-deploy-backup-${LAGOON_GIT_SAFE_BRANCH}-`date +%Y-%m-%d-%T`.db.sql.gz
+          fi;
+        service: cli
+    - run:
+        name: run custom pre-rollout tasks
+        command: ahoy my pre-rollout
+        service: cli
+
+  post-rollout:
+    - run:
+        name: Restore production DB.
+        command: |
+          if [ "$LAGOON_GIT_BRANCH" != "production" ] && ! $(/usr/local/bin/wp core is-installed --path=/app/web --allow-root); then
+            echo "===> Importing production database"
+            ./.docker/scripts/download-db.sh
+            ./.docker/scripts/import-db.sh
+          fi
+        service: cli
+    - run:
+        name: run custom post-rollout tasks
+        command: ahoy my post-rollout
+        service: cli
+
+environments:
+  main:
+    # routes:
+    cronjobs:
+      - name: cronjob
+        schedule: "*/15 * * * *"
+        command: cd web && wp cron event run --due-now
+        service: cli
