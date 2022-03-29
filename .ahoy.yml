@@ -132,7 +132,7 @@ commands:
       mv "docker-compose-$project_type.yml" docker-compose.yml && rm -rf docker-compose-*.yml
       mv "composer-$project_type.json" composer.json && rm -rf composer-*.json
       mv ".docker-$project_type" .docker && rm -rf .docker-*
-      mv ".lagoon-$project_type.yml" .lagoon.yml && rm -rf .lagoon-*
+      mv ".lagoon-$project_type.yml" .lagoon.yml && rm -f .lagoon-*
       cp .env.default .env
       sed -i.bak "s/{{ PROJECT_NAME }}/$project_name/" .env && rm .env.bak
       sed -i.bak "s/{{ PROJECT_NAME }}/$project_name/" docker-compose.yml && rm docker-compose.yml.bak
