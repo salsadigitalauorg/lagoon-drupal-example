@@ -38,7 +38,7 @@ define('DB_CHARSET', 'utf8mb4');
 define('DB_COLLATE', '');
 
 /** Settings that make Quant work properly. */
-$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+$protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://';
 
 if (!empty($_SERVER['HTTP_HOST'])) {
   define('WP_SITEURL', $protocol . $_SERVER['HTTP_HOST']);
