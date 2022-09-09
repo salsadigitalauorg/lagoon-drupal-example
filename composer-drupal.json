@@ -47,7 +47,8 @@
             ],
             "file-mapping": {
                 "[web-root]/sites/default/all.settings.php": ".docker/assets/all.settings.php",
-                "[web-root]/sites/default/settings.lagoon.php": ".docker/assets/settings.lagoon.php"
+                "[web-root]/sites/default/settings.lagoon.php": ".docker/assets/settings.lagoon.php",
+                "[project-root]/drush/sites/lagoon.site.yml": ".docker/assets/lagoon.site.yml"
             },
             "locations": {
                 "web-root": "web/"
