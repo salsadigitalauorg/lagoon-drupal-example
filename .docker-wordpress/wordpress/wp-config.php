@@ -45,16 +45,16 @@ if ($_SERVER['HTTP_HOST'] == 'nginx') {
 $port = isset($port) ? $port : '';
 
 if (!empty($_SERVER['HTTP_HOST'])) {
-  define('WP_SITEURL', $protocol . $_SERVER['HTTP_HOST'] . $port);
-  define('WP_HOME', $protocol . $_SERVER['HTTP_HOST'] . $port);
-  define('WP_PLUGIN_URL', $protocol . $_SERVER['HTTP_HOST'] . $port . '/content/plugins' );
-  define('WP_CONTENT_URL', $protocol . $_SERVER['HTTP_HOST'] . $port . '/content');
+  define('WP_SITEURL', $protocol . $_SERVER['HTTP_HOST']);
+  define('WP_HOME', $protocol . $_SERVER['HTTP_HOST']);
+  define('WP_PLUGIN_URL', $protocol . $_SERVER['HTTP_HOST'] . '/content/plugins' );
+  define('WP_CONTENT_URL', $protocol . $_SERVER['HTTP_HOST'] . '/content');
 }
 elseif (!empty(getenv('LAGOON_ROUTE'))) {
-  define('WP_SITEURL', $protocol . getenv('LAGOON_ROUTE')) . $port;
-  define('WP_HOME', $protocol . getenv('LAGOON_ROUTE')) . $port;
-  define('WP_PLUGIN_URL', $protocol . getenv('LAGOON_ROUTE') . $port . '/content/plugins' );
-  define('WP_CONTENT_URL', $protocol . getenv('LAGOON_ROUTE') . $port . '/content');
+  define('WP_SITEURL', getenv('LAGOON_ROUTE'));
+  define('WP_HOME', getenv('LAGOON_ROUTE'));
+  define('WP_PLUGIN_URL', getenv('LAGOON_ROUTE') . '/content/plugins' );
+  define('WP_CONTENT_URL', getenv('LAGOON_ROUTE') . '/content');
 }
 
 define ('WPCF7_LOAD_JS', false);
