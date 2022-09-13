@@ -8,7 +8,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 # Add function to .bashrc to run wp-cli with --allow-root
 RUN echo 'wp() { /usr/local/bin/wp "$@" --allow-root; }' >>  ~/.bashrc \
     && mkdir -p ~/.wp-cli \
-    && echo "path: '/app/web/wp'" > ~/.wp-cli/config.yml
+    && echo "path: '/app/web'" > ~/.wp-cli/config.yml
 
 COPY composer.* /app/
 RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev
