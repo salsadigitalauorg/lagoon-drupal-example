@@ -38,13 +38,29 @@ define('DB_CHARSET', 'utf8mb4');
 define('DB_COLLATE', '');
 
 /** Settings that make Quant work properly. */
-$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+$protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://';
+if ($_SERVER['HTTP_HOST'] == 'nginx') {
+  $port = ':8080';
+}
+$port = isset($port) ? $port : '';
 
 if (!empty($_SERVER['HTTP_HOST'])) {
   define('WP_SITEURL', $protocol . $_SERVER['HTTP_HOST']);
   define('WP_HOME', $protocol . $_SERVER['HTTP_HOST']);
+  define('WP_PLUGIN_URL', $protocol . $_SERVER['HTTP_HOST'] . '/content/plugins' );
+  define('WP_CONTENT_URL', $protocol . $_SERVER['HTTP_HOST'] . '/content');
 }
+elseif (!empty(getenv('LAGOON_ROUTE'))) {
+  define('WP_SITEURL', getenv('LAGOON_ROUTE'));
+  define('WP_HOME', getenv('LAGOON_ROUTE'));
+  define('WP_PLUGIN_URL', getenv('LAGOON_ROUTE') . '/content/plugins' );
+  define('WP_CONTENT_URL', getenv('LAGOON_ROUTE') . '/content');
+}
+
 define ('WPCF7_LOAD_JS', false);
+
+define('WP_CONTENT_DIR', dirname(__FILE__) . '/content');
+define('WP_PLUGIN_DIR', dirname( __FILE__ ) . '/content/plugins' );
 
 /**#@+
  * Authentication Unique Keys and Salts.
@@ -98,4 +114,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Sets up WordPress vars and included files. */
 require_once( ABSPATH . 'wp-settings.php' );
-
