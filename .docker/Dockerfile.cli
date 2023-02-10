@@ -1,6 +1,6 @@
 ARG IMAGE_VERSION=latest
 
-FROM uselagoon/php-7.4-cli-drupal:${IMAGE_VERSION}
+FROM uselagoon/php-8.1-cli-drupal:${IMAGE_VERSION}
 
 COPY . /app
 RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev

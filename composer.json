@@ -10,17 +10,17 @@
         }
     ],
     "require": {
-        "amazeeio/drupal_integrations": "0.3.6",
+        "amazeeio/drupal_integrations": "dev-master",
         "composer/installers": "2.0.1",
-        "cweagans/composer-patches": "1.7.1",
-        "drupal/core-project-message": "9.2.9",
-        "drupal/core-recommended": "9.2.9",
-        "drupal/lagoon_logs": "1.1.0",
-        "drush/drush": "10.6.2",
+        "cweagans/composer-patches": "1.7.3",
+        "drupal/core-project-message": "9.4.11",
+        "drupal/core-recommended": "9.4.11",
+        "drupal/lagoon_logs": "^2.1",
+        "drush/drush": "10.6.1",
         "zaporylie/composer-drupal-optimizations": "1.2.0"
     },
     "require-dev": {
-        "drupal/core-dev-pinned": "9.2.9"
+        "drupal/core-dev-pinned": "9.4.11"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -34,7 +34,8 @@
             "composer/installers": true,
             "cweagans/composer-patches": true,
             "drupal/core-project-message": true,
-            "zaporylie/composer-drupal-optimizations": true
+            "zaporylie/composer-drupal-optimizations": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "extra": {
@@ -54,8 +55,7 @@
             ],
             "file-mapping": {
                 "[web-root]/sites/default/all.settings.php": ".docker/assets/all.settings.php",
-                "[web-root]/sites/default/settings.lagoon.php": ".docker/assets/settings.lagoon.php",
-                "[project-root]/drush/sites/lagoon.site.yml": ".docker/assets/lagoon.site.yml"
+                "[web-root]/sites/default/settings.lagoon.php": ".docker/assets/settings.lagoon.php"
             },
             "locations": {
                 "web-root": "web/"
