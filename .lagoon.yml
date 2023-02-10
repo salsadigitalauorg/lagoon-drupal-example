@@ -3,7 +3,7 @@ docker-compose-yaml: docker-compose.yml
 api: https://api.salsa.hosting/graphql
 ssh: ssh.salsa.hosting:22
 
-project: {{ PROJECT_NAME }}
+project: lagoon-drupal-example
 
 tasks:
   pre-rollout:

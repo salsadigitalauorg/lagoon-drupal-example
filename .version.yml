@@ -1,2 +1,2 @@
-type: {{ PROJECT_TYPE }}
+type: drupal
 scaffold_version: 1.0
