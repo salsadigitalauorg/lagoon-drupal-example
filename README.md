@@ -1,4 +1,4 @@
-## PHP app scaffolding
+## PHP app scaffolding (static non-prod)
 
 This project aims to provide a barebones scaffold for PHP applications.
 
