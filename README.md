@@ -1,4 +1,4 @@
-## PHP app scaffolding
+## PHP app scaffoldings
 
 **TEST change to exercise PR**
 
