@@ -1,0 +1,15 @@
+apiVersion: k6.io/v1alpha1
+kind: K6
+metadata:
+  name: lagoon-drupal-example
+spec:
+  parallelism: 2
+  script:
+    configMap:
+      name: lagoon-drupal-example
+      file: umami-no-static-test.js
+  arguments: -o experimental-prometheus-rw
+  runner:
+    env:
+      - name: K6_PROMETHEUS_RW_SERVER_URL
+        value: http://kube-prometheus-stack-prometheus.monitoring:9099/api/v1/write
