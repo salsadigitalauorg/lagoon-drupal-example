@@ -31,6 +31,10 @@ environments:
             wapoc.salsa.digital:
               tls-acme: 'false'
               insecure: Allow
+          -
+            wapoc.salsa.melbourne:
+              tls-acme: 'false'
+              insecure: Allow
     cronjobs:
       - name: drush cron
         schedule: "*/15 * * * *"
