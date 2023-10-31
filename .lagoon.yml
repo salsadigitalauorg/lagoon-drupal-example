@@ -26,6 +26,7 @@ environments:
           -
             d3vaie88ppi09b.cloudfront.net:
               tls-acme: 'false'
+              inseure: Allow
     cronjobs:
       - name: drush cron
         schedule: "*/15 * * * *"
