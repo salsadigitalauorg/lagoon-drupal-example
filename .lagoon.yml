@@ -28,12 +28,8 @@ environments:
               tls-acme: 'false'
               insecure: Allow
           -
-            wapoc.salsa.digital:
-              tls-acme: 'false'
-              insecure: Allow
-          -
             wapoc.salsa.melbourne:
-              tls-acme: 'false'
+              tls-acme: 'true'
               insecure: Allow
     cronjobs:
       - name: drush cron
