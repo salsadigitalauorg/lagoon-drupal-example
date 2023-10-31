@@ -27,6 +27,10 @@ environments:
             d3vaie88ppi09b.cloudfront.net:
               tls-acme: 'false'
               insecure: Allow
+          -
+            wapoc.salsa.digital:
+              tls-acme: 'false'
+              insecure: Allow
     cronjobs:
       - name: drush cron
         schedule: "*/15 * * * *"
