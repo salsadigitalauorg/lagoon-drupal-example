@@ -21,9 +21,11 @@ tasks:
 environments:
   main:
     routes:
-      - 
-        d3vaie88ppi09b.cloudfront.net:
-          tls-acme: false
+      -
+        nginx:
+          -
+            d3vaie88ppi09b.cloudfront.net:
+              tls-acme: 'false'
     cronjobs:
       - name: drush cron
         schedule: "*/15 * * * *"
