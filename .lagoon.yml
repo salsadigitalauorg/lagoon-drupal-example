@@ -24,8 +24,8 @@ environments:
       -
         nginx:
           -
-            d3vaie88ppi09b.cloudfront.net:
-              tls-acme: 'false'
+            wapoc.salsa.digital:
+              tls-acme: 'true'
               insecure: Allow
           -
             wapoc.salsa.melbourne:
